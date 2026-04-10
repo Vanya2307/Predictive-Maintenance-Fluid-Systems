@@ -214,3 +214,7 @@ data/*.zip
 data/raw/*
 data/processed/*
 .ipynb_checkpoints/
+
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
