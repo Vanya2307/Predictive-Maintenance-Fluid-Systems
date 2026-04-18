@@ -30,3 +30,5 @@ This project investigates predictive maintenance in two different fluid-power me
 
 ## Project Structure
 ...
+
+TODO: save final figures to ../figures/ after notebook structure and plots are finalized.
