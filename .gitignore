@@ -218,3 +218,4 @@ data/processed/*
 !data/.gitkeep
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/raw/metropt3_failure_reports.csv
