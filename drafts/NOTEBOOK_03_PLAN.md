@@ -207,3 +207,9 @@ All experimental code, trial windows, rough tests, discarded comparisons, and de
 ## Updates log
 
 If any deviation from the plan becomes necessary during scratchpad testing, the change will be recorded here before inclusion in the final notebook.
+
+
+**April 26** - Failure timestamps for MetroPT-3 obtained from the original UCI dataset documentation. Four "Air leak / High stress" events are reported with start and end times, replacing the earlier working assumption of using temporal gaps as failure proxies. The homogeneous failure mode (all four are the same type) is favorable for hypothesis testing because expected sensor signatures should be consistent across events.
+
+The failure intervals will be stored as a separate project data file and loaded explicitly in Notebook 03 to ensure reproducible window construction.
+
