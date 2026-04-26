@@ -33,6 +33,32 @@ $$\alpha_{\text{corrected}} = \frac{\alpha}{k}$$
 
 For the $k$ tests planned across both datasets, the corrected threshold replaces $\alpha = 0.05$ as the decision criterion for individual results.
 
+
+
+### Kruskal-Wallis omnibus test
+
+The Kruskal-Wallis test is a non-parametric extension of Mann-Whitney U to more than two independent groups. Given $k$ groups with sample sizes $n_1, n_2, \ldots, n_k$ and total sample size $N = \sum_{i=1}^{k} n_i$, all observations are pooled and ranked. The test statistic is:
+
+$$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$$
+
+where $R_i$ is the sum of ranks for group $i$.
+
+The null hypothesis $H_0$ states that all $k$ groups are drawn from the same distribution. Under $H_0$, $H$ approximately follows a chi-squared distribution with $k - 1$ degrees of freedom, from which the p-value is computed.
+
+Like Mann-Whitney U, Kruskal-Wallis does not assume normality and is robust to outliers, which makes it appropriate for sensor features that vary across cycle-level operating regimes.
+
+
+### Multiple-comparison correction
+
+When $k$ hypothesis tests are conducted simultaneously at significance level $\alpha$, the family-wise error rate increases above $\alpha$. The Bonferroni correction adjusts the per-test threshold to:
+
+$$\alpha_{\text{corrected}} = \frac{\alpha}{k}$$
+
+Equivalently, raw p-values can be compared against the original $\alpha$ threshold after multiplying by $k$, with values exceeding 1 clamped at 1. For the $k = 5$ primary hydraulic tests planned in this notebook, the corrected threshold is $\alpha_{\text{corrected}} = 0.010$.
+
+The Bonferroni correction is conservative - it controls the family-wise error rate strictly but reduces statistical power. It is appropriate when the cost of false positives is high relative to false negatives, which is the standard expectation for a confirmatory analysis.
+
+
 ### Reliability metrics
 
 For a system with observed failure events indexed by $i = 1, \ldots, n$, each with start time $t_i^{\text{start}}$ and end time $t_i^{\text{end}}$:

@@ -96,7 +96,7 @@ MetroPT-3 is a continuous time-series dataset with known failure timestamps but 
 
 ### Analytical idea
 
-The hydraulic dataset is cycle-based and includes explicit condition labels. The main strategy will be to test whether the strongest feature–condition relationships identified in Notebook 02 remain statistically supported.
+The hydraulic dataset is cycle-based and includes explicit condition labels. The main strategy will be to test whether the strongest feature-condition relationships identified in Notebook 02 remain statistically supported.
 
 ### Selected feature-condition pairs
 
@@ -123,15 +123,15 @@ These may be included as weaker or contrastive findings, but they should not dom
 
 ### Open decisions for scratchpad
 
-- testing strategy for multi-level condition labels: best-vs-worst contrast only, grouped binary contrast (`healthy` vs `degraded`), or omnibus test plus post-hoc pairwise comparisons
+- testing strategy for multi-level condition labels: best-vs-worst contrast only, grouped binary contrast (`healthy` vs `degraded`), or omnibus test plus pairwise comparisons
 - whether weaker feature pairs should remain in the final notebook
 - which effect-size metric is most appropriate
 
 ### Expected statistical tests
 
-- Mann–Whitney U test for binary contrasts
-- Kruskal–Wallis test for multi-level comparisons, if applicable
-- post-hoc pairwise Mann–Whitney tests only if justified by the omnibus result
+- Mann-Whitney U test for binary contrasts
+- Kruskal-Wallis test for multi-level comparisons, if applicable
+- follow-up pairwise Mann-Whitney tests only if justified by the omnibus result
 - effect-size reporting alongside p-values
 - Bonferroni correction for multiple comparisons across tested variables
 
@@ -206,30 +206,21 @@ All experimental code, trial windows, rough tests, discarded comparisons, and de
 
 ## Updates log
 
-If any deviation from the plan becomes necessary during scratchpad testing, the change will be recorded here before inclusion in the final notebook.
+If any deviation from the plan becomes necessary during scratchpad testing, the change is recorded here before inclusion in the final notebook.
 
 
-**April 26** - Failure timestamps for MetroPT-3 obtained from the original UCI dataset documentation. Four "Air leak / High stress" events are reported with start and end times, replacing the earlier working assumption of using temporal gaps as failure proxies. The homogeneous failure mode (all four are the same type) is favorable for hypothesis testing because expected sensor signatures should be consistent across events.
+**April 25** - MetroPT-3 failure timestamps obtained from UCI documentation: four "Air leak / High stress" events with start/end times, replacing the earlier gap-proxy assumption. Stored as a separate data file for reproducible window construction.
 
-The failure intervals will be stored as a separate project data file and loaded explicitly in Notebook 03 to ensure reproducible window construction.
+**April 25** - Coverage-threshold rule added: a failure event is included in a window-length test only if both pre-failure and normal windows cover at least 90% of the requested duration. Under this rule at 6h, Failure 4 is excluded (normal window covers 74.7% of requested 6h).
 
-**April 26** - Window-coverage diagnostic distinguished two causes of row-count variation: sampling-rate variation (full time coverage at slower sampling) and genuine truncation due to missing data. A coverage-threshold rule was added to the methodology: a failure event is included in a given window-length test only if both its pre-failure window and its normal window cover at least 90% of the requested duration. Under this rule at the 6h window length, Failure 4 is excluded because its normal window covers only 74.7% of the requested 6h. The number of retained failure events at each window length will be reported as part of the test results.
+**April 26** - Per-event median summary at the 6h window showed inconsistent direction across failures for several MetroPT-3 variables. Because n=3 events per group leaves the event-level Mann-Whitney U with very limited power, the planned interpretation rule applies directly: significance is one of four criteria alongside direction consistency, magnitude, and physical plausibility. The event-level Mann-Whitney U is reported as supporting evidence rather than as a decisive test.
 
-**April 26** - Per-event median summary at the 6h window length showed that pre-failure vs normal direction is not uniform across failure events for several MetroPT-3 variables. Oil_temperature shows the most consistent shift; TP2 shows partial consistency; H1, DV_pressure, and Motor_current show inconsistent direction across events. Because n=3 events per group leaves the event-level Mann-Whitney U with very limited statistical power, the planned interpretation rule applies directly: significance is one of four criteria, alongside direction consistency, effect magnitude, and physical plausibility. The event-level Mann-Whitney U will be computed and reported as supporting evidence rather than as a decisive test.
+**April 26** - Window-length sweep across 1h/6h/12h/24h identified 6h as the working window for MetroPT-3. The 24h window showed direction inversion for `Oil_temperature`, indicating window dilution rather than amplification.
 
-**April 26** - Window-length sweep across 1h/6h/12h/24h, applied to all five MetroPT-3 candidate variables, identified 6h as the working window length. Oil_temperature at 6h is the only (variable, window) combination showing perfect per-event direction consistency across all three retained failures.
+**April 26** - Final variable selection for MetroPT-3 formal testing: `Oil_temperature`, `TP2`, `H1`. `Motor_current` and `DV_pressure` dropped from primary testing based on sweep findings; `Motor_current` retained in the exploratory sweep as a transparently reported secondary finding.
 
-Motor_current and DV_pressure show no robust pre-failure signature at any tested window length and are dropped from
-primary testing. 
+**April 26** - Hydraulic primary testing complete: `cooler_condition` (Kruskal-Wallis + within-family pairwise, both `TS1` features overwhelmingly significant), `pump_leakage` (Mann-Whitney endpoint contrast, robust significant result on `EPS1_mean`), `stable_flag` (Mann-Whitney binary, both `TS1_std` and `VS1_std` significant but with small effect sizes). 
 
-H1 shows partial consistency at shorter windows with a direction flip in one failure and is reported as a secondary finding.
+Final hydraulic test count k=5, Bonferroni-corrected α=0.010. `valve_condition` and `accumulator_pressure` excluded from formal testing per Notebook 02 EDA. Reliability metrics computed for MetroPT-3 directly (MTTR ≈ 22h, MTBF ≈ 28 days); for the hydraulic dataset, condition-state proportions are reported as the analogous concept since standard MTBF/MTTR definitions do not apply.
 
-TP2 shows two-of-three consistency with one flat case at 6h and is reported as a secondary finding. 
-
-The 24h window shows direction inversion for Oil_temperature, indicating window dilution rather than amplification.
-
-**April 26** - Final variable selection for MetroPT-3 formal Mann-Whitney testing: Oil_temperature, TP2, and H1. 
-
-Motor_current was retained in the exploratory sweep but excluded from formal testing because its direction across failure events is inconsistent at every tested window length, suggesting it captures operating-regime variation rather than
-pre-failure behavior. This decision keeps Hypothesis 2's coverage of both temperature and pressure physical concepts while reporting the electrical/load-related result transparently as a secondary finding.
 
