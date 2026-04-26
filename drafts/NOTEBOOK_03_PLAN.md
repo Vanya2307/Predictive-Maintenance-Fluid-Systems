@@ -216,3 +216,20 @@ The failure intervals will be stored as a separate project data file and loaded 
 **April 26** - Window-coverage diagnostic distinguished two causes of row-count variation: sampling-rate variation (full time coverage at slower sampling) and genuine truncation due to missing data. A coverage-threshold rule was added to the methodology: a failure event is included in a given window-length test only if both its pre-failure window and its normal window cover at least 90% of the requested duration. Under this rule at the 6h window length, Failure 4 is excluded because its normal window covers only 74.7% of the requested 6h. The number of retained failure events at each window length will be reported as part of the test results.
 
 **April 26** - Per-event median summary at the 6h window length showed that pre-failure vs normal direction is not uniform across failure events for several MetroPT-3 variables. Oil_temperature shows the most consistent shift; TP2 shows partial consistency; H1, DV_pressure, and Motor_current show inconsistent direction across events. Because n=3 events per group leaves the event-level Mann-Whitney U with very limited statistical power, the planned interpretation rule applies directly: significance is one of four criteria, alongside direction consistency, effect magnitude, and physical plausibility. The event-level Mann-Whitney U will be computed and reported as supporting evidence rather than as a decisive test.
+
+**April 26** - Window-length sweep across 1h/6h/12h/24h, applied to all five MetroPT-3 candidate variables, identified 6h as the working window length. Oil_temperature at 6h is the only (variable, window) combination showing perfect per-event direction consistency across all three retained failures.
+
+Motor_current and DV_pressure show no robust pre-failure signature at any tested window length and are dropped from
+primary testing. 
+
+H1 shows partial consistency at shorter windows with a direction flip in one failure and is reported as a secondary finding.
+
+TP2 shows two-of-three consistency with one flat case at 6h and is reported as a secondary finding. 
+
+The 24h window shows direction inversion for Oil_temperature, indicating window dilution rather than amplification.
+
+**April 26** - Final variable selection for MetroPT-3 formal Mann-Whitney testing: Oil_temperature, TP2, and H1. 
+
+Motor_current was retained in the exploratory sweep but excluded from formal testing because its direction across failure events is inconsistent at every tested window length, suggesting it captures operating-regime variation rather than
+pre-failure behavior. This decision keeps Hypothesis 2's coverage of both temperature and pressure physical concepts while reporting the electrical/load-related result transparently as a secondary finding.
+

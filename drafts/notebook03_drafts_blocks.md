@@ -1,0 +1,4 @@
+** For MetroPT-3 results section**
+
+The formal MetroPT-3 hypothesis tests prioritize the strongest and most interpretable temperature and pressure signals identified during the window-length sweep: `Oil_temperature`, `TP2`, and `H1`. Electrical and load-related behavior was explored through `Motor_current` in the scratchpad analysis but showed inconsistent direction across the retained failure events at every tested window length. This finding is consistent with the operating-regime transition documented in Notebook 02 and indicates that `Motor_current` reflects general
+operational variation rather than pre-failure behavior in this dataset. This negative result is reported transparently rather than excluded from consideration.
