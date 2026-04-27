@@ -29,6 +29,9 @@ This project investigates predictive maintenance in two different fluid-power me
 - Interpretation of results
 
 ## Project Structure
-...
+- Notebook 01: data loading, validation, and cleaning
+- Notebook 02: exploratory data analysis (distributions, correlations, condition-stratified comparisons)
+- Notebook 03: formal hypothesis testing, reliability analysis, cross-dataset interpretation
+- Notebook 04: project synthesis, limitations, methodological reflection, future directions
 
 TODO: save final figures to ../figures/ after notebook structure and plots are finalized.
