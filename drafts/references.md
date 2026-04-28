@@ -43,13 +43,14 @@ in Science Conference*, 92-96.
 
 ## Reliability engineering
 
-IEC 60050-192:2015. International Electrotechnical Vocabulary —
-Part 192: Dependability. International Electrotechnical Commission.
+IEC 60050-192:2015. International Electrotechnical Vocabulary - Part 192: Dependability. International Electrotechnical Commission.
 
+---
 
 ## Acknowledgments
 
-The use of MTBF and MTTR as supporting reliability metrics for this project was suggested by Kamend1 (Discord)
+This project was developed with the assistance of Claude (Anthropic).
+The use of MTBF and MTTR as supporting reliability metrics for this project was suggested by Kamend1 (Discord).
 
 
 

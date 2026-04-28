@@ -1,8 +1,8 @@
 # Cross-Dataset Predictive Maintenance of Fluid-Power Systems
 
-**Author:** Vanya Videva
-**Course:** Data Science, SoftUni
-**Date:** April 2026
+**Author:** Vanya Videva  
+**Course:** Data Science, SoftUni  
+**Date:** April 2026  
 
 ---
 
